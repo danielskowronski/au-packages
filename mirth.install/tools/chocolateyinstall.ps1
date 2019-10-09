@@ -23,4 +23,8 @@ $packageArgs = @{
   validExitCodes= @(0)
 }
 
+# chocolateybeforemodify.ps1 is supposed to do this, but known issue https://github.com/chocolatey/choco/issues/1092
+Get-Service "Mirth Connect Service" -ErrorAction SilentlyContinue | Stop-Service
+Get-Process mcmanager -ErrorAction SilentlyContinue | Stop-Process
+
 Install-ChocolateyPackage @packageArgs
